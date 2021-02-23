@@ -106,7 +106,7 @@ get_header(); ?>
 
                                 <div class="ipad">
                                     <?php $featured_posts = get_field('departement_ou_equipe'); ?>
-                                        <? if( $featured_posts ): ?>
+                                        <?php if( $featured_posts ): ?>
                                             <?php foreach( $featured_posts as $post ): ?>
                                         <a href="mailto:<?php the_field( 'email' ); ?>" class="btns outline contactexpert">Contacter l'expert</a>
                                             <?php endforeach;  wp_reset_postdata(); ?>
@@ -118,7 +118,7 @@ get_header(); ?>
                                     
                                 <div class="desktop">
                                     <?php $featured_posts = get_field('departement_ou_equipe'); ?>
-                                        <? if( $featured_posts ): ?>
+                                        <?php if( $featured_posts ): ?>
                                             <?php foreach( $featured_posts as $post ): ?>
                                         <a href="mailto:<?php the_field( 'email' ); ?>" class="btns outline contactexpert">Contacter l'expert</a>
                                             <?php endforeach;  wp_reset_postdata(); ?>
@@ -129,7 +129,7 @@ get_header(); ?>
                                 </div>
 
                                 <ul class="marque">
-                                    <? if( $featured_posts ): ?>
+                                    <?php if( $featured_posts ): ?>
                                         <?php foreach( $featured_posts as $post ): ?>
                                             <li>
                                                 <div class="phone"><i class="fas fa-user"></i><?php the_field( 'nom-du-responsable' ); ?></div>
