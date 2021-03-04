@@ -29,11 +29,16 @@ get_header(); ?>
             <li class="breadcrumb-item"><a href="#">Nos produits</a></li>
             <li class="breadcrumb-item">
                 <ul class="taxonomy">
-                <?php foreach ( array_reverse($terms, true) as $term ) {  ?>
-                <li><a href="<?php echo get_term_link($term->term_id); ?>">
-                        <?php echo  $term->name ;  }  ?>
-                    </a>
-                </li>
+                    <?php if( $terms[0]->parent != 0 ): 
+                            $terms = array_reverse($terms, true);
+                        endif;
+                    ?>
+                        
+                    <?php foreach ( $terms as $term ) {  ?>
+                    <li><a href="<?php echo get_term_link($term->term_id); ?>">
+                            <?php echo  $term->name ;  }  ?>
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li class="breadcrumb-item active" aria-current="page"><?php the_title(); ?></li>
@@ -103,7 +108,20 @@ get_header(); ?>
                                         <?php } ?>
                                     </div>
                                 <?php endwhile; endif; ?>
+                                
+                                <?php $colors = get_field( 'color' );?>
+                                
+                                <?php if( $colors ): ?>
+                                    Color:
+                                       <select>
+                                            <?php foreach( $colors as $color ): ?>
+                                                <option id="<?php echo $color ?>"><?php echo $color ?></option>
+                                            <?php endforeach;  wp_reset_postdata(); ?>
 
+                                        </select>
+                                <?php endif; ?>
+                                    
+                                    
                                 <div class="ipad">
                                     <?php $featured_posts = get_field('departement_ou_equipe'); ?>
                                         <?php if( $featured_posts ): ?>
