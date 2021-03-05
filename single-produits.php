@@ -4,10 +4,16 @@ get_header(); ?>
   <!-- Banniere -->
   <section id="banniere" class="container">
         <?php
-            $terms = get_the_terms( $post->ID , 'nos-produits','>' );
-            $images = get_field( 'taxonomy_banniere', 'nos-produits_'.$terms[0]->parent);
-            $imagesipad = get_field( 'taxonomy_banniere_ipad', 'nos-produits_'.$terms[0]->parent);
-            $imagesmobile = get_field( 'taxonomy_banniere_mobile', 'nos-produits_'.$terms[0]->parent);
+            $terms = get_the_terms( $post->ID , 'nos-produits');
+            
+            if( $terms[0]->parent != 0 ) {
+                $terms = array_reverse($terms, false);
+            }
+            
+            $lengthTerms = count($terms) - 1 ;
+            $images = get_field( 'taxonomy_banniere', 'nos-produits_'.$terms[$lengthTerms]->parent);
+            $imagesipad = get_field( 'taxonomy_banniere_ipad', 'nos-produits_'.$terms[$lengthTerms]->parent);
+            $imagesmobile = get_field( 'taxonomy_banniere_mobile', 'nos-produits_'.$terms[$lengthTerms]->parent);
 
             echo '<img src="'. $images['url'] .'" class="img-fluid desktop">';
             echo '<img src="'. $imagesipad['url'] .'" class="img-fluid ipad">';
@@ -17,7 +23,7 @@ get_header(); ?>
             <div class="titres">
 
                 <ul class="taxonomy">
-                <li><?php echo $terms[0]->name; ?></li>
+                <li><?php echo $terms[$lengthTerms]->name; ?></li>
                 </ul>
             </div>
         </div>
@@ -29,11 +35,8 @@ get_header(); ?>
             <li class="breadcrumb-item"><a href="#">Nos produits</a></li>
             <li class="breadcrumb-item">
                 <ul class="taxonomy">
-                    <?php if( $terms[0]->parent != 0 ): 
-                            $terms = array_reverse($terms, true);
-                        endif;
-                    ?>
-                        
+                    
+                    
                     <?php foreach ( $terms as $term ) {  ?>
                     <li><a href="<?php echo get_term_link($term->term_id); ?>">
                             <?php echo  $term->name ;  }  ?>
