@@ -76,7 +76,8 @@ get_header(); ?>
                                   <i class="[ icon  icon--list ]  [ fa  fa-list ]  [ icon ]"></i>
                                 </div>
                                 <div class="products grid group">
-                                <?php $ref = new WP_Query(array('post_type' => 'produits', 'orderby' => 'rand', 'posts_per_page' => '15')); ?>
+                                <?php //, 'post__in'=> array(39559)
+                                $ref = new WP_Query(array('post_type' => 'produits', 'orderby' => 'rand', 'posts_per_page' => '15')); ?>
 	                                <?php  if( $ref->have_posts() ) : while( $ref->have_posts() ) : $ref->the_post(); ?>
                                     <div class="product">
                                         <div class="content-product-imagin"></div>
