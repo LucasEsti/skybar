@@ -50,6 +50,7 @@ get_header(); ?>
             <?php if( get_field('image_promo_full') ): ?>
                 <div class="col-sm-12">
                     <div class="block-images promo">
+                        <a href="<?php the_field('lien_bandeau_section2'); ?>" class="lien"></a>
                         <img src="<?php the_field('image_promo_full2'); ?>" class="img-fluid mobile" alt="nouvel an">
                         <img src="<?php the_field('image_promo_full3'); ?>" class="img-fluid ipad" alt="nouvel an">
                         <img src="<?php the_field('image_promo_full'); ?>" class="img-fluid desktop" alt="nouvel an">
