@@ -59,105 +59,23 @@ get_header(); ?>
             <?php endif; ?>
         </div>
     </section>
+    
+<style>
+    
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
 
-    <!-- Contenu Page -->
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <!-- Nouveautes -->
-                <section id="nouveaux">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h1>Nos <strong>nouveautés</strong> du moment</h1>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="wrapper">
-                                <div class="header">
-                                  <i class="[ icon  icon--grid ]  [ fa  fa-th ]  [ icon ]  active"></i>
-                                  <i class="[ icon  icon--list ]  [ fa  fa-list ]  [ icon ]"></i>
-                                </div>
-                                <div class="products grid group">
-                                <?php //, 'post__in'=> array(39559)
-                                $ref = new WP_Query(array('post_type' => 'produits', 'orderby' => 'rand', 'posts_per_page' => '15')); ?>
-	                                <?php  if( $ref->have_posts() ) : while( $ref->have_posts() ) : $ref->the_post(); ?>
-                                    <div class="product">
-                                        <div class="content-product-imagin"></div>
-                                        <div class="content-product-list"></div>
-                                        <div class="product__inner">
-                                            <a href="<?php the_permalink(); ?>" class="link">
-                                                <div class="product__image">
-                                                    <?php
-                                                        $images = get_field('galerie_produit');
-                                                        $image  = $images[0];
-                                                        if( $image ) : ?>
-                                                            <img src="<?php echo $image['url']; ?>" alt="<?php the_title();?>" class="img-fluid" />
-                                                        <?php endif; ?>
-                                                </div>
-                                            </a>
-                                            <div class="product__details">
-                                                <div class="product__name"><?php the_title(); ?></div>
-                                                <div class="ref"><?php if( get_field('marques') ): ?><strong>Marque:</strong> <?php the_field('marques'); ?> - <?php endif; ?>  <?php if( get_field('references') ): ?><strong>Ref:</strong> <?php the_field('references'); ?><?php endif; ?></div>
-                                                <div class="content-product">
-                                                    <div class="product__short-description">
-                                                        <?php //the_field("extrait_description"); ?>
-                                                        <?php echo wp_trim_words( get_field("extrait_description"), 23, '...' ); ?>
-                                                    </div>
-                                                    <a href="<?php the_permalink(); ?>" class="btns">En savoir plus</a>
-                                                    <?php echo do_shortcode('[bpcart_button product="'.get_the_ID().'"]')?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <?php endwhile; wp_reset_postdata(); ?>
-                                <?php endif; ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+    .full-height {
+      height: 100%;
+      background: yellow;
+    }
 
-                <!--Prestation-->
-                <section id="prestation">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <ul class="listing-prestation">
-                                    <li><a href="<?php echo site_url(); ?>/conditions">
-                                        <i class="fas fa-truck"></i>
-                                        <div class="titre">Livraison à domicile</div>
-                                        </a>
-                                    </li>
-                                    <li><a href="<?php echo site_url(); ?>/sav/">
-                                        <i class="fas fa-info-circle"></i>
-                                        <div class="titre">SAV</div>
-                                        <p>Services client<br>du lundi au samedi</p></a>
-                                    </li>
-                                    <li><a href="<?php echo site_url(); ?>/contact">
-                                            <i class="fas fa-clipboard-list"></i>
-                                            <div class="titre">Devis gratuit</div>
-                                            <!-- <p>Préparez en ligne<br>votre visite en magasin</p> -->
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!--Publicité-->
-                <section id="pub">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <ul class="listing-pub">
-                                    <?php if( have_rows('publicite', 'option') ): $i = 0;?>
-                                        <?php while( have_rows('publicite', 'option') ): the_row(); 
-                                        $i++;
-			
-                                        if( $i > 2 )
-                                        {
-                                            break;
-                                        }
+    .demo {
+        width: 100%;
+        height: 100%; !important;
+    }
                                         ?>
                                             <li>
                                                 <img src="<?php the_sub_field('fond'); ?>" class="img-fluid" alt="CABLE INDUSTRIEL">>
@@ -232,18 +150,18 @@ get_header(); ?>
                                                     <button class="newsletter__form-submit" name="subscribe" id="mc-embedded-subscribe">S'inscrire <i class="fas fa-envelope"></i></button>
                                                 </form>
                                                 <!--End mc_embed_signup-->
-                                            </li>
-                                        </ul>
+                </li>
+            </ul>
                                         <?php if( get_field('footer_texte_newsletter', 'option') ): ?>
                                             <?php the_field('footer_texte_newsletter', 'option'); ?>
                                         <?php endif; ?>
-                                    </div>
+        </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
-
+    
             </div>
         </div>
     </div>

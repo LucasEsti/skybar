@@ -2,8 +2,7 @@
 
     <!-- Banniere -->
     <section id="banniere" class="container">
-
-
+ 
         <?php
 
             // Display the artist image
