@@ -36,8 +36,23 @@
         }
         
         #titreMenu {
+            font-family: "Poppins", sans-serif;
+            font-weight: 600;
+            font-size: 1.2rem;
             color: #<?php the_field('couleur-menu');?>;
         }
+        
+        .back-to-top {
+            background-color: #<?php the_field('couleur-menu');?>; !important
+        }
+        
+        .intro .owl-theme .owl-dots .owl-dot.active span {
+            background-color: #<?php the_field('couleur-menu');?>; !important
+        }
+        .navbar-toggler {
+            margin-top: 0rem;
+        }
+        
     </style>
 </head>
 
@@ -46,26 +61,36 @@
     <!-- ======= Header/Navbar ======= -->
     <nav class="navbar navbar-default navbar-trans navbar-expand-lg">
         <div class="container">
-            <button class="border border-dark rounded navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <a class="navbar-brand text-brand" href="<?php the_permalink();?>"><span id="titreMenu"></span></a>
+            <?php if( have_rows('menu-liste') ): 
+                $j = 0;
+                while( have_rows('menu-liste') ): the_row(); 
+                    $j++;
+                endwhile; 
+             endif; ?>
+            <?php 
+            if( $j > 1 ): 
+                ?>
+                <button class="border border-dark rounded navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button> 
+            <?php endif; ?>
+            <h6 id="titreMenu" class="align-center"></h6>
             <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
-                <ul class="navbar-nav">
-                <?php if( have_rows('menu-liste') ): ?>
-                    <?php $i = 0; ?>
-                    <?php while( have_rows('menu-liste') ): the_row(); ?>
-                        <li class="nav-item <?php if($i == 0): echo 'd-none'; endif;?>">
-                            <a id="nav-<?php the_sub_field('id-carrousel'); ?>" idDiv="<?php the_sub_field('id-carrousel'); ?>" class="nav-link <?php if($i == 0): echo 'active'; endif;?>" href="#<?php the_sub_field('id-carrousel'); ?>"> <?php the_sub_field('sous-categorie-name'); ?> </a>
-                        </li>
-                    <?php 
-                    $i++;
-                    endwhile; ?>
-                <?php endif; ?>
-                </ul>
-            </div>
+                 <ul class="navbar-nav">
+                 <?php if( have_rows('menu-liste') ): ?>
+                     <?php $i = 0; ?>
+                     <?php while( have_rows('menu-liste') ): the_row(); ?>
+                         <li class="nav-item <?php if($i == 0): echo 'd-none'; endif;?>">
+                             <a id="nav-<?php the_sub_field('id-carrousel'); ?>" idDiv="<?php the_sub_field('id-carrousel'); ?>" class="nav-link <?php if($i == 0): echo 'active'; endif;?>" href="#<?php the_sub_field('id-carrousel'); ?>"> <?php the_sub_field('sous-categorie-name'); ?> </a>
+                         </li>
+                     <?php 
+                     $i++;
+                     endwhile; ?>
+                 <?php endif; ?>
+                 </ul>
+             </div> 
         </div>
     </nav><!-- End Header/Navbar -->
 
