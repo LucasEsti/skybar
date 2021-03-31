@@ -143,7 +143,7 @@
                                                     <strong>CABLE INDUSTRIEL<br/> H07 RN-F</strong>
                                                 </div>
                                             </div>
-                                            <a href="https://batpro-madagascar.com/produits/cable-h07rnf-5g-6mm%c2%b2-noir/" class="btn-custom2">Nouveaux produits</a>
+                                            <a href="https://skybar-madagascar.com/produits/cable-h07rnf-5g-6mm%c2%b2-noir/" class="btn-custom2">Nouveaux produits</a>
                                         </div>
                                     </li>
                                     <li>
@@ -154,7 +154,7 @@
                                                     <strong>TÔLE PLANE NOIR<br/> S235 JR</strong>
                                                 </div>
                                             </div>
-                                            <a href="https://batpro-madagascar.com/produits/tpn-2x1m-ep08mm-laf-1280kg-u/" class="btn-custom2">Nouveaux produits</a>
+                                            <a href="https://skybar-madagascar.com/produits/tpn-2x1m-ep08mm-laf-1280kg-u/" class="btn-custom2">Nouveaux produits</a>
                                         </div>
                                     </li>
                                 </ul>

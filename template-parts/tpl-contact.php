@@ -77,7 +77,7 @@ get_header(); ?>
                                         Bd,  Ratsimandrava<br>BP 757<br>Soanierana
                                     </address>
                                     <a href="#" class="boxtel">+ 261 (20) 22 620 13 / 14 / 15</a>
-                                    <a href="mailto:commercial@batpro.mg" class="boxtel">commercial@batpro.mg</a>
+                                    <a href="mailto:commercial@skybar.mg" class="boxtel">commercial@skybar.mg</a>
                                 </div>
                             </div> -->
                             <div class="itemCoord">

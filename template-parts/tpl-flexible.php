@@ -155,12 +155,12 @@ if( have_rows('page_dynamique') ): ?>
                 </div>
             </div>
         </section>
-    <?php elseif( get_row_layout() == 'clients_batpro' ):  ?>
+    <?php elseif( get_row_layout() == 'clients_skybar' ):  ?>
         <section id="clients" class="container">
             <div class="row">
                 <div class="col-sm-12">
                     <?php 
-                    $imagesc = get_sub_field('logo_clients_batpro');
+                    $imagesc = get_sub_field('logo_clients_skybar');
                     if( $imagesc ): ?>
                     <ul>
                         <?php foreach( $imagesc as $imagec ): ?>
@@ -196,13 +196,13 @@ if( have_rows('page_dynamique') ): ?>
                 </div>
             </div>
         </div>
-    <?php elseif( get_row_layout() == 'statistique_batpro' ):  ?>
+    <?php elseif( get_row_layout() == 'statistique_skybar' ):  ?>
         <div id="statistics">
             <section class="section">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-12 text-center">
-                            <div class="titre"><span>BATPRO</span> en chiffre c’est aussi plus de </div>   
+                            <div class="titre"><span>skybar</span> en chiffre c’est aussi plus de </div>   
                         </div>
                         <div class="col-sm-6 text-center">
                             <span class="statvalue" numx="100">0</span>
@@ -270,7 +270,7 @@ if( have_rows('page_dynamique') ): ?>
                                         <?php endif; ?>
                                         <li>
                                             <!-- Begin Mailchimp Signup Form -->
-                                            <form action="https://batpro-madagscar.us18.list-manage.com/subscribe/post?u=4b73f06c0dc5f5e68295c3f35&amp;id=bd990ba08d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate newsletter__form" target="_blank" novalidate>
+                                            <form action="https://skybar-madagscar.us18.list-manage.com/subscribe/post?u=4b73f06c0dc5f5e68295c3f35&amp;id=bd990ba08d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate newsletter__form" target="_blank" novalidate>
                                                 <input type="email" value="" name="EMAIL" class="required email newsletter__form-input" id="mce-EMAIL" placeholder="Saisissez votre adresse email*">
                                                 <div id="mce-responses" class="clear">
                                                     <div class="response" id="mce-error-response" style="display:none"></div>

@@ -140,7 +140,7 @@ get_header(); ?>
                                             <?php endif; ?>
                                             <li>
                                                 <!-- Begin Mailchimp Signup Form -->
-                                                <form action="https://batpro-madagscar.us18.list-manage.com/subscribe/post?u=4b73f06c0dc5f5e68295c3f35&amp;id=bd990ba08d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate newsletter__form" target="_blank" novalidate>
+                                                <form action="https://skybar-madagscar.us18.list-manage.com/subscribe/post?u=4b73f06c0dc5f5e68295c3f35&amp;id=bd990ba08d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate newsletter__form" target="_blank" novalidate>
                                                     <input type="email" value="" name="EMAIL" class="required email newsletter__form-input" id="mce-EMAIL" placeholder="Saisissez votre adresse email*">
                                                     <div id="mce-responses" class="clear">
                                                         <div class="response" id="mce-error-response" style="display:none"></div>

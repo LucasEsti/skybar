@@ -1,17 +1,17 @@
 <?php
 require( dirname( __FILE__ ) . '/navwalker.php' );
-if ( ! function_exists( 'batpro_setup' ) ) :
-	function batpro_setup() {
-		load_theme_textdomain( 'batpro' );
+if ( ! function_exists( 'skybar_setup' ) ) :
+	function skybar_setup() {
+		load_theme_textdomain( 'skybar' );
 		add_theme_support( 'automatic-feed-links' );
         add_theme_support( 'title-tag' );
 		add_theme_support( 'post-thumbnails' );
 		set_post_thumbnail_size( 1200, 9999 );
 		register_nav_menus(
 			array(
-				'primary' => __( 'Primary Menu', 'batpro' ),
-                'social'  => __( 'Social ', 'batpro' ),
-                'footer'  => __( 'Footer', 'batpro' ),
+				'primary' => __( 'Primary Menu', 'skybar' ),
+                'social'  => __( 'Social ', 'skybar' ),
+                'footer'  => __( 'Footer', 'skybar' ),
 			)
 		);
 		add_theme_support(
@@ -25,23 +25,23 @@ if ( ! function_exists( 'batpro_setup' ) ) :
 			)
 		);
 	}
-endif; // batpro_setup
-add_action( 'after_setup_theme', 'batpro_setup' );
+endif; // skybar_setup
+add_action( 'after_setup_theme', 'skybar_setup' );
 
 
-function batpro_scripts() {
+function skybar_scripts() {
 // Theme stylesheet.
-wp_enqueue_style( 'batpro-bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css', array(), '1.0' );
-wp_enqueue_style( 'batpro-all', get_template_directory_uri() . '/css/all.min.css', array(), '1.0' );
-// wp_enqueue_style( 'batpro-fancybox', get_template_directory_uri() . '/css/jquery.fancybox.min.css', array(), '1.0' );
-wp_enqueue_style( 'batpro-aos', get_template_directory_uri() . '/css/aos.css', array(), '1.0' );
-wp_enqueue_style( 'batpro-slick', get_template_directory_uri() . '/css/slick.css', array(), '1.0' );
-wp_enqueue_style( 'batpro-style', get_stylesheet_uri() );
-wp_enqueue_style( 'batpro-mainstyle', get_template_directory_uri() . '/css/style.css', array(), '1.0' );
-wp_enqueue_style( 'batpro-responsive', get_template_directory_uri() . '/css/responsive.css', array(), '1.0' );
+wp_enqueue_style( 'skybar-bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css', array(), '1.0' );
+wp_enqueue_style( 'skybar-all', get_template_directory_uri() . '/css/all.min.css', array(), '1.0' );
+// wp_enqueue_style( 'skybar-fancybox', get_template_directory_uri() . '/css/jquery.fancybox.min.css', array(), '1.0' );
+wp_enqueue_style( 'skybar-aos', get_template_directory_uri() . '/css/aos.css', array(), '1.0' );
+wp_enqueue_style( 'skybar-slick', get_template_directory_uri() . '/css/slick.css', array(), '1.0' );
+wp_enqueue_style( 'skybar-style', get_stylesheet_uri() );
+wp_enqueue_style( 'skybar-mainstyle', get_template_directory_uri() . '/css/style.css', array(), '1.0' );
+wp_enqueue_style( 'skybar-responsive', get_template_directory_uri() . '/css/responsive.css', array(), '1.0' );
 
 }
-add_action( 'wp_enqueue_scripts', 'batpro_scripts' );
+add_action( 'wp_enqueue_scripts', 'skybar_scripts' );
 
 // custom excerpt
 function the_excerpt_limit($max_char) {

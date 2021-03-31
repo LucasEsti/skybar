@@ -7,7 +7,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
+<meta name = "viewport" id = "viewport_device">
   <title>Sky bar Novotel</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
@@ -38,19 +38,19 @@
     <!-- ======= Header/Navbar ======= -->
     <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
         <div class="container">
-            <button class="border border-wi border-dark rounded navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="border border-dark rounded navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
-            <a class="navbar-brand text-brand" href="index.html"><?php the_title(); ?><span class="color-b"></span></a>
+            <a class="navbar-brand text-brand" href="<?php the_permalink();?>"><span class="color-b"><?php the_title(); ?></span></a>
             <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
                 <ul class="navbar-nav">
                 <?php if( have_rows('menu-liste') ): ?>
                     <?php $i = 0; ?>
                     <?php while( have_rows('menu-liste') ): the_row(); ?>
                         <li class="nav-item">
-                            <a id="nav-<?php the_sub_field('id-carrousel'); ?>" class="nav-link <?php if($i == 0): echo 'active'; endif;?>" href="#<?php the_sub_field('id-carrousel'); ?>"> <?php the_sub_field('id-carrousel'); ?> </a>
+                            <a id="nav-<?php the_sub_field('id-carrousel'); ?>" idDiv="<?php the_sub_field('id-carrousel'); ?>" class="nav-link <?php if($i == 0): echo 'active'; endif;?>" href="#<?php the_sub_field('id-carrousel'); ?>"> <?php the_sub_field('sous-categorie-name'); ?> </a>
                         </li>
                     <?php 
                     $i++;
@@ -64,18 +64,23 @@
     <!-- ======= Intro Section ======= -->
     <div class="intro intro-carousel" data-spy="scroll" data-target="#myScrollspy" data-offset="1">
         <?php if( have_rows('menu-liste') ): ?>
+            <?php $i = 0; ?>
             <?php while( have_rows('menu-liste') ): the_row(); ?>
-                <div id="<?php the_sub_field('id-carrousel'); ?>" class="carouselSky owl-carousel owl-theme">
-                    <?php the_sub_field('sous-categorie-name'); ?>
-                    <?php
-                        $images = get_sub_field('gallery');
-                        if( $images ): ?>
-                            <?php foreach($images as $image): ?>
-                                    <img src="<?php echo $image; ?>" class="img-fluid">
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                </div>
-            <?php endwhile; ?>
+            
+                    <div id="<?php the_sub_field('id-carrousel'); ?>" class="<?php if($i != 0): echo 'd-none'; endif;?> carouselSky owl-carousel owl-theme">
+                        <?php the_sub_field('sous-categorie-name'); ?>
+                        <?php
+                            $images = get_sub_field('gallery');
+                            if( $images ): ?>
+                                <?php foreach($images as $image): ?>
+                                        <img src="<?php echo $image; ?>" class="img-fluid">
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                    </div>
+                    
+            <?php 
+                    $i++;
+                endwhile; ?>
         <?php endif; ?>
         
     </div><!-- End Intro Section -->
@@ -101,10 +106,18 @@
   <script>
       $(document).ready(function() {
           $(".nav-link").on("click", function() {
-              var idlink = $(this).attr("id");
-              //remove active 
-              $(".nav-link.active").removeClass("active");
-              $("#" + idlink).addClass("active");
+                var navIdlink = $(this).attr("id");
+                var idDiv = $(this).attr("idDiv");
+                //remove active
+                var actif = $(".nav-link.active");
+                var idDivActif = actif.attr("idDiv");
+                actif.removeClass("active");
+                if (idDiv != idDivActif) {
+                    $("#" + idDiv).removeClass("d-none");
+                    $("#" + idDivActif).addClass("d-none");
+                }
+              
+                $("#" + navIdlink).addClass("active");
           });
       });
   </script>
