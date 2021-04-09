@@ -106,7 +106,7 @@
                             $images = get_sub_field('gallery');
                             if( $images ): ?>
                                 <?php foreach($images as $image): ?>
-                                        <img src="<?php echo $image; ?>" class="img-fluid">
+                                        <img src="<?php echo $image; ?>" class="img-fluid" onContextMenu="return false;">
                                 <?php endforeach; ?>
                             <?php endif; ?>
                     </div>
@@ -138,6 +138,8 @@
   <script src="<?php bloginfo("template_url");  ?>/assets/js/main.js"></script>
   <script>
       $(document).ready(function() {
+//          document.addEventListener('contextmenu', event => event.preventDefault());
+          
           $(".nav-link").on("click", function() {
                 var navIdlink = $(this).attr("id");
                 var idDiv = $(this).attr("idDiv");
