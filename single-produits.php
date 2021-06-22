@@ -49,9 +49,15 @@
         .intro .owl-theme .owl-dots .owl-dot.active span {
             background-color: #<?php the_field('couleur-menu');?>; !important
         }
+        
         .navbar-toggler {
             margin-top: 0rem;
         }
+        
+        .owl-stage {
+            margin: 0 auto;
+        }
+        
         
     </style>
 </head>
@@ -93,7 +99,7 @@
              </div> 
         </div>
     </nav><!-- End Header/Navbar -->
-
+    
     <!-- ======= Intro Section ======= -->
     <div class="intro intro-carousel" data-spy="scroll" data-target="#myScrollspy" data-offset="1">
         <?php if( have_rows('menu-liste') ): ?>
@@ -105,9 +111,9 @@
                         <?php
                             $images = get_sub_field('gallery');
                             if( $images ): ?>
-                                <?php foreach($images as $image): ?>
+                                    <?php foreach($images as $image): ?>
                                         <img src="<?php echo $image; ?>" class="img-fluid" onContextMenu="return false;">
-                                <?php endforeach; ?>
+                                    <?php endforeach; ?>
                             <?php endif; ?>
                     </div>
                     
@@ -117,7 +123,7 @@
         <?php endif; ?>
         
     </div><!-- End Intro Section -->
-
+    
     <?php endwhile; ?>
   <?php endif; ?>
 

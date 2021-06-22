@@ -42,14 +42,50 @@
   });
 
   /*--/ Carousel owl /--*/
-  $('.carouselSky').owlCarousel({
+  var owlCarouselSky = $('.carouselSky');
+  owlCarouselSky.owlCarousel({
     loop: false,
-    margin: -1,
     items: 1,
     nav: true,
+    autoplay: true,
     dots: false,
-    navText: ['<i class="ion-ios-arrow-back" aria-hidden="true"></i>', '<i class="ion-ios-arrow-forward" aria-hidden="true"></i>']
+    navText: ['<i class="ion-ios-arrow-back" aria-hidden="true"></i>', '<i class="ion-ios-arrow-forward" aria-hidden="true"></i>'],
+    responsive: {
+                0: {
+                    items: 1,
+                    margin: 30
+                },
+                600: {
+                    items: 3,
+                    margin: 30,
+//                    afterInit: function () {
+//                            console.log("et");
+//                            owlCarouselSky.find('.owl-stage').each(function () {
+//                                var w = $(this).width() / 2;
+//                                $(this).width(w);
+//                                $(this).css('margin', '0 auto');
+//                            });
+//                        },
+//                        afterUpdate: function () {
+//                            owlCarouselSky.find('.owl-stage').each(function () {
+//                                var w = $(this).width() / 2;
+//                                $(this).width(w);
+//                                $(this).css('margin', '0 auto');
+//                            });
+//                        }
+                }
+            }
   });
+  
+//  $(window).on('resize load', function() {
+//    var outerStage = owlCarouselSky.find('.owl-stage-outer');
+//    var outerWidth = Number(outerStage.css('width').replace('px', ''));
+//    var width = Number(owlCarouselSky.find('.owl-stage').css('width').replace('px', ''));
+//    if (width < outerWidth)
+//        outerStage.css('left', Math.ceil(outerWidth - width) + 'px');
+//    else 
+//        outerStage.css('left',0);
+//});
 
   /*--/ Animate Carousel /--*/
   $('.intro-carousel').on('translate.owl.carousel', function() {
