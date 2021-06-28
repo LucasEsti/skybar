@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css"/>
     <link href="<?php bloginfo("template_url");  ?>/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php bloginfo("template_url");  ?>/assets/mobile-vertical-carousel/src/carousel-vertical.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css">
     <!-- Template Main CSS File -->
     <link href="<?php bloginfo("template_url");  ?>/assets/css/style.css" rel="stylesheet">
     <link href="<?php bloginfo("template_url");  ?>/assets/css/responsive.css" rel="stylesheet">
@@ -112,7 +113,7 @@
     <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
     
     <!-- ======= Header/Navbar ======= -->
-    <nav class="navbar  navbar-expand-lg fixed-bottom ">
+    <nav class="navbar navbar-expand-lg fixed-bottom ">
         <div id="blur"> 
         </div>
         <div class="container-fluid">
@@ -132,7 +133,8 @@
                  <?php endif; ?>
         </div>
     </nav><!-- End Header/Navbar -->
-        
+    
+
     <!-- ======= Intro Section ======= -->
     <div class="cv-carousel intro intro-carousel" data-spy="scroll" data-target="#myScrollspy" data-offset="1">
         <?php if( have_rows('menu-liste') ): ?>
@@ -173,12 +175,34 @@
   <script src="<?php bloginfo("template_url");  ?>/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
   <script src="<?php bloginfo("template_url");  ?>/assets/vendor/scrollreveal/scrollreveal.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.appear/0.4.1/jquery.appear.min.js" integrity="sha512-vYYoQJKYzaJQaOaYxaJhhmxikOJ2SEgHwmCNa0EMP0aRr7opdt4HHrorAwnCyPm8bdW/JBApIomo85YaBX81zA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
+<!-- NOTE: prior to v2.2.1 tiny-slider.js need to be in <body> -->
 
+  
   <script src="<?php bloginfo("template_url");  ?>/assets/mobile-vertical-carousel/src/carousel-vertical.js"></script>
   <!-- Template Main JS File -->
   <script src="<?php bloginfo("template_url");  ?>/assets/js/main.js"></script>
   <script>
     $(document).ready(function() {
+        var customizedFunction = function (info, eventName) {
+            // direct access to info object
+            chapArray[$('.tns-slide-active').attr('id')].trigger('to.owl.carousel', [0]);
+        }
+          
+        var slider = tns({
+            container: '.cv-carousel',
+            items: 1,
+            loop: false,
+            nav: false,
+            animateIn: "jello",
+            animateOut: "rollOut",
+            slideBy: "page",
+            axis: "vertical",
+            controls: false,
+        });
+
+        // bind function to event
+        slider.events.on('transitionEnd', customizedFunction);
         var chapitreString = "<?php if( have_rows('menu-liste') ): 
             $j = 0;
             while(have_rows('menu-liste')): the_row();
@@ -188,51 +212,18 @@
                 $j++;
             endwhile; 
          endif; ?>";
+                 
         var chapitre = chapitreString.split(",");
-        
-        
-        $('.cv-carousel').carouselVertical({
-            items: 1,
-            nav: false
-          });
-        
+//        $('.cv-carousel').carouselVertical({
+//            items: 1,
+//            nav: false
+//        });
         
         var lastScrollTop = 0;
         var stateScroll = 0;
         var scrollBase = null;
         var lastChap = 0;
-//        $(window).scroll(function(e){
-//            var st = $(this).scrollTop();
-//            if (st > lastScrollTop){
-//                if (scrollBase == null) {
-//                    scrollBase = 1;
-//                    console.log("down");
-//                    stateScroll++;
-//                    if (stateScroll == chapitre.length) {
-//                        stateScroll = chapitre.length;
-//                    }
-//                }
-//            } else {
-//                if (scrollBase == null) {
-//                    scrollBase = 1;
-//                    console.log("up");
-//                    stateScroll--;
-//                    if (stateScroll < 0) {
-//                        stateScroll = 0;
-//                    }
-//                }
-//            }
-//            lastScrollTop = st;
-//            
-//            clearTimeout($.data(this, 'scrollTimer'));
-//            $.data(this, 'scrollTimer', setTimeout(function() {
-//                if (scrollBase == 1) {
-//                    console.log(stateScroll);
-//                    scrollBase = null;
-//                    window.location.href = '#Entree';
-//                }
-//            }, 50));
-//        });
+        
         
         var owlCaroussOption = {
             loop: false,
@@ -275,8 +266,13 @@
         }
         console.log(chapArray);
         
+        $('button').on('click', function() {
+            chapArray["Entree"].trigger('to.owl.carousel', [0, 500]);
+        });
+        
         var anime = false;
         function animateDraggSlide(e) {
+            console.log("animateDraggSlide");
             anime = true;
             var item = $(".owl-item.active");
             item.addClass(item.children().data('animate'));
