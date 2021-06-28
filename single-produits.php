@@ -184,9 +184,15 @@
   <script src="<?php bloginfo("template_url");  ?>/assets/js/main.js"></script>
   <script>
     $(document).ready(function() {
+        
         var customizedFunction = function (info, eventName) {
             // direct access to info object
-            chapArray[$('.tns-slide-active').attr('id')].trigger('to.owl.carousel', [0]);
+            for (var i = 0; i < chapLenght - 1; i++) {
+                if (chapitre[i] != $('.tns-slide-active').attr('id')) {
+                    chapArray[chapitre[i]].trigger('to.owl.carousel', [0, 1, false]);
+                }
+            }
+            
         }
           
         var slider = tns({
@@ -214,15 +220,6 @@
          endif; ?>";
                  
         var chapitre = chapitreString.split(",");
-//        $('.cv-carousel').carouselVertical({
-//            items: 1,
-//            nav: false
-//        });
-        
-        var lastScrollTop = 0;
-        var stateScroll = 0;
-        var scrollBase = null;
-        var lastChap = 0;
         
         
         var owlCaroussOption = {
@@ -231,7 +228,7 @@
             dots: false,
             navText: ["<i class='fa fa-arrow-circle-left'></i>","<i class='fa fa-arrow-circle-right'></i>"],
             onDragged: animateDraggSlide,
-            onTranslated: animateSlide,
+            //onTranslated: animateSlide,
             onTranslate: removeAnimation,
             responsive: {
                 0: {
@@ -248,28 +245,11 @@
         
         var chapLenght = chapitre.length;
         var chapArray = [];
-        var chapTemp = chapitre[0];
         for (var i = 0; i < chapLenght - 1; i++) {
+            
             chapArray[chapitre[i]] = $('#' + chapitre[i]);
-//            chapArray[chapitre[i]].appear();
             chapArray[chapitre[i]].owlCarousel(owlCaroussOption);
-//            $(document.body).on('appear', '#' + chapitre[i], function(e, $affected) {
-//                // this code is executed for each appeared element
-//                var currentChap = this["attributes"][0]["nodeValue"];
-//                if (chapTemp != currentChap) {
-//                    console.log(currentChap);
-//                    chapTemp = currentChap;
-//                    //window.location.href = "#" + currentChap;
-//                }
-//                
-//            });
         }
-        console.log(chapArray);
-        
-        $('button').on('click', function() {
-            chapArray["Entree"].trigger('to.owl.carousel', [0, 500]);
-        });
-        
         var anime = false;
         function animateDraggSlide(e) {
             console.log("animateDraggSlide");
@@ -283,6 +263,7 @@
                 anime = false;
                 return false;
             }
+            console.log("animateSlide");
             var item = $(".owl-item.active");
             item.addClass(item.children().data('animate'));
         }
