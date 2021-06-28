@@ -24,7 +24,7 @@
     <link href="<?php bloginfo("template_url");  ?>/assets/vendor/ionicons/css/ionicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css"/>
     <link href="<?php bloginfo("template_url");  ?>/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="<?php bloginfo("template_url");  ?>/assets/mobile-vertical-carousel/src/carousel-vertical.css" />
     <!-- Template Main CSS File -->
     <link href="<?php bloginfo("template_url");  ?>/assets/css/style.css" rel="stylesheet">
     <link href="<?php bloginfo("template_url");  ?>/assets/css/responsive.css" rel="stylesheet">
@@ -38,6 +38,10 @@
             font-weight: 600;
             font-size: 1.2rem;
             color: #<?php the_field('couleur-menu');?>;
+        }
+        
+        .cv-item {
+            height: 100% !important;
         }
         
         .back-to-top {
@@ -128,16 +132,15 @@
                  <?php endif; ?>
         </div>
     </nav><!-- End Header/Navbar -->
-    
         
     <!-- ======= Intro Section ======= -->
-    <div class="intro intro-carousel" data-spy="scroll" data-target="#myScrollspy" data-offset="1">
+    <div class="cv-carousel intro intro-carousel" data-spy="scroll" data-target="#myScrollspy" data-offset="1">
         <?php if( have_rows('menu-liste') ): ?>
             <?php $i = 0; ?>
             <?php while( have_rows('menu-liste') ): the_row(); ?>
                     <!-- ======= <?php if($i != 0): ?> <div class="container"><?php the_sub_field('sous-categorie-name'); ?></div> <?php endif;?> ======= -->
                     
-                    <div id="<?php the_sub_field('id-carrousel'); ?>" class=" carouselSky owl-carousel owl-theme">
+                    <div id="<?php the_sub_field('id-carrousel'); ?>" class="item carouselSky owl-carousel owl-theme">
                         
                         <?php
                             $images = get_sub_field('gallery');
@@ -169,13 +172,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="<?php bloginfo("template_url");  ?>/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
   <script src="<?php bloginfo("template_url");  ?>/assets/vendor/scrollreveal/scrollreveal.min.js"></script>
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.appear/0.4.1/jquery.appear.min.js" integrity="sha512-vYYoQJKYzaJQaOaYxaJhhmxikOJ2SEgHwmCNa0EMP0aRr7opdt4HHrorAwnCyPm8bdW/JBApIomo85YaBX81zA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+  <script src="<?php bloginfo("template_url");  ?>/assets/mobile-vertical-carousel/src/carousel-vertical.js"></script>
   <!-- Template Main JS File -->
   <script src="<?php bloginfo("template_url");  ?>/assets/js/main.js"></script>
   <script>
     $(document).ready(function() {
-        
         var chapitreString = "<?php if( have_rows('menu-liste') ): 
             $j = 0;
             while(have_rows('menu-liste')): the_row();
@@ -187,11 +190,54 @@
          endif; ?>";
         var chapitre = chapitreString.split(",");
         
+        
+        $('.cv-carousel').carouselVertical({
+            items: 1,
+            nav: false
+          });
+        
+        
+        var lastScrollTop = 0;
+        var stateScroll = 0;
+        var scrollBase = null;
+        var lastChap = 0;
+//        $(window).scroll(function(e){
+//            var st = $(this).scrollTop();
+//            if (st > lastScrollTop){
+//                if (scrollBase == null) {
+//                    scrollBase = 1;
+//                    console.log("down");
+//                    stateScroll++;
+//                    if (stateScroll == chapitre.length) {
+//                        stateScroll = chapitre.length;
+//                    }
+//                }
+//            } else {
+//                if (scrollBase == null) {
+//                    scrollBase = 1;
+//                    console.log("up");
+//                    stateScroll--;
+//                    if (stateScroll < 0) {
+//                        stateScroll = 0;
+//                    }
+//                }
+//            }
+//            lastScrollTop = st;
+//            
+//            clearTimeout($.data(this, 'scrollTimer'));
+//            $.data(this, 'scrollTimer', setTimeout(function() {
+//                if (scrollBase == 1) {
+//                    console.log(stateScroll);
+//                    scrollBase = null;
+//                    window.location.href = '#Entree';
+//                }
+//            }, 50));
+//        });
+        
         var owlCaroussOption = {
             loop: false,
             items: 1,
             dots: false,
-            nav: true,
             navText: ["<i class='fa fa-arrow-circle-left'></i>","<i class='fa fa-arrow-circle-right'></i>"],
             onDragged: animateDraggSlide,
             onTranslated: animateSlide,
@@ -211,9 +257,21 @@
         
         var chapLenght = chapitre.length;
         var chapArray = [];
+        var chapTemp = chapitre[0];
         for (var i = 0; i < chapLenght - 1; i++) {
             chapArray[chapitre[i]] = $('#' + chapitre[i]);
+//            chapArray[chapitre[i]].appear();
             chapArray[chapitre[i]].owlCarousel(owlCaroussOption);
+//            $(document.body).on('appear', '#' + chapitre[i], function(e, $affected) {
+//                // this code is executed for each appeared element
+//                var currentChap = this["attributes"][0]["nodeValue"];
+//                if (chapTemp != currentChap) {
+//                    console.log(currentChap);
+//                    chapTemp = currentChap;
+//                    //window.location.href = "#" + currentChap;
+//                }
+//                
+//            });
         }
         console.log(chapArray);
         
@@ -248,41 +306,41 @@
         
         var currentCarrousselId = "";
         $(".linkChap").on("click", function() {
-            
-            $(this).children().addClass('animated flip');
-            var child = $(this).children();
-            setTimeout(function(){ child.removeClass('animated flip'); }, 3000);
-            
-            var navIdlink = $(this).attr("id");
-            var idDiv = $(this).attr("idDiv");
-            currentCarrousselId = idDiv;
-            
-            //remove active
-            var actif = $(".linkChap.active");
-            var idDivActif = actif.attr("idDiv");
-            actif.removeClass("active");
-            if (idDivActif == undefined) {
-                idDivActif = "couverture";
-            }
-            if (idDiv != idDivActif) {
-                $("#" + idDiv).removeClass("d-none");
-                $("#" + idDivActif).addClass("d-none");
-                
-                chapArray[idDiv].trigger('play.owl.autoplay', [5000]);
-                chapArray[idDivActif].trigger('stop.owl.autoplay');
-                $("#nav-" + idDivActif).children().css("color", "black");
-                
-                setTimeout(function(){ 
-                     console.log($("#" + idDivActif + " .owl-nav").children());
-                    $("#" + idDivActif + " .owl-nav").children().addClass('animated heartBeat'); 
-                }, 5000);
-                
-            }
-            var textSpan = $(this).text();
-            
-            $("#titreMenu").text(textSpan);
-            $("#" + navIdlink).addClass("active");
-            $("#" + navIdlink).children().css("color", "red");
+//            
+//            $(this).children().addClass('animated flip');
+//            var child = $(this).children();
+//            setTimeout(function(){ child.removeClass('animated flip'); }, 3000);
+//            
+//            var navIdlink = $(this).attr("id");
+//            var idDiv = $(this).attr("idDiv");
+//            currentCarrousselId = idDiv;
+//            
+//            //remove active
+//            var actif = $(".linkChap.active");
+//            var idDivActif = actif.attr("idDiv");
+//            actif.removeClass("active");
+//            if (idDivActif == undefined) {
+//                idDivActif = "couverture";
+//            }
+//            if (idDiv != idDivActif) {
+//                $("#" + idDiv).removeClass("d-none");
+//                $("#" + idDivActif).addClass("d-none");
+//                
+//                chapArray[idDiv].trigger('play.owl.autoplay', [5000]);
+//                chapArray[idDivActif].trigger('stop.owl.autoplay');
+//                $("#nav-" + idDivActif).children().css("color", "black");
+//                
+//                setTimeout(function(){ 
+//                     console.log($("#" + idDivActif + " .owl-nav").children());
+//                    $("#" + idDivActif + " .owl-nav").children().addClass('animated heartBeat'); 
+//                }, 5000);
+//                
+//            }
+//            var textSpan = $(this).text();
+//            
+//            $("#titreMenu").text(textSpan);
+//            $("#" + navIdlink).addClass("active");
+//            $("#" + navIdlink).children().css("color", "red");
         });
         $(".owl-prev").on("click", function() {
             var child = $(this).children();
