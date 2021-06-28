@@ -200,8 +200,6 @@
             items: 1,
             loop: false,
             nav: false,
-            animateIn: "jello",
-            animateOut: "rollOut",
             slideBy: "page",
             axis: "vertical",
             controls: false,
