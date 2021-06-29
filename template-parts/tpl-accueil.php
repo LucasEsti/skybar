@@ -4,166 +4,352 @@
  * Template Name: Accueil
  */
 
-get_header(); ?>
+ ?>
+<?php
 
-    <!-- Slider -->
-    <section id="slider" class="container">
-        <div class="row">
-            <div class="col-sm-7">
-                <ul class="liste-slider">
-                    <?php if( have_rows('slider_section1') ): ?>
-                        <?php while( have_rows('slider_section1') ): the_row(); ?>
-                            <li>
-                                <?php if( get_sub_field('type_video') ): ?>
-                                    <div class="item video">
-                                        <video class="slide-video slide-media" loop muted preload="metadata" poster="<?php the_sub_field('image'); ?>">
-                                            <source src="<?php the_sub_field('video'); ?>" type="video/mp4" />
-                                        </video>
-                                    </div>  
-                                <?php else : ?>
-                                    <img src="<?php the_sub_field('image'); ?>" class="img-fluid">
-                                <?php endif; ?>       
-                                <div class="caption"> 
-                                    <a href="<?php the_sub_field('lien'); ?>" class="btn-custom2"><?php the_sub_field('bouton'); ?></a>
-                                </div>
-                            </li>
-                        <?php endwhile; ?>
-                    <?php endif; ?>
-                </ul>
-            </div>
-            <div class="col-sm-5">
-                <?php if( get_field('image_promo_section2') ): ?>
-                    <div class="block-images">
-                        <a href="<?php the_field('lien_promo_section2'); ?>" class="lien"></a>
-                        <img src="<?php the_field('image_promo2_mobile_section2'); ?>" class="img-fluid mobile" alt="himel">
-                        <img src="<?php the_field('image_promo_section2'); ?>" class="img-fluid" alt="himel">
-                    </div>
-                <?php endif; ?>
-                <?php if( get_field('image_promo2_section2') ): ?>
-                    <div class="block-images">
-                        <a href="<?php the_field('lien_promo2_section2'); ?>" class="lien"></a>
-                        <img src="<?php the_field('image_promo2_mobile2_section2'); ?>" class="img-fluid mobile" alt="Delta">
-                        <img src="<?php the_field('image_promo2_section2'); ?>" class="img-fluid" alt="Delta">
-                    </div>
-                <?php endif; ?>
-            </div>
-            <?php if( get_field('image_promo_full') ): ?>
-                <div class="col-sm-12">
-                    <div class="block-images promo">
-                        <a href="<?php the_field('lien_bandeau_section2'); ?>" class="lien"></a>
-                        <img src="<?php the_field('image_promo_full2'); ?>" class="img-fluid mobile" alt="nouvel an">
-                        <img src="<?php the_field('image_promo_full3'); ?>" class="img-fluid ipad" alt="nouvel an">
-                        <img src="<?php the_field('image_promo_full'); ?>" class="img-fluid desktop" alt="nouvel an">
-                    </div>
-                </div>
-            <?php endif; ?>
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name = "viewport" id = "viewport_device">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    
+    <title><?php the_title(); ?></title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="<?php bloginfo("template_url");  ?>/assets/img/favicon.png" rel="icon">
+    <link href="<?php bloginfo("template_url");  ?>/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <!-- Vendor CSS Files -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="<?php bloginfo("template_url");  ?>/assets/vendor/ionicons/css/ionicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css"/>
+    <link href="<?php bloginfo("template_url");  ?>/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?php bloginfo("template_url");  ?>/assets/mobile-vertical-carousel/src/carousel-vertical.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css">
+    <!-- Template Main CSS File -->
+    <link href="<?php bloginfo("template_url");  ?>/assets/css/style.css" rel="stylesheet">
+    <link href="<?php bloginfo("template_url");  ?>/assets/css/responsive.css" rel="stylesheet">
+    <style>
+        .navbar-default.navbar-trans .nav-link::before {
+            background-color: #<?php the_field('couleur-menu');?>; !important
+        }
+        
+        #titreMenu {
+            font-family: "Poppins", sans-serif;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #<?php the_field('couleur-menu');?>;
+        }
+        
+        .cv-item {
+            height: 100% !important;
+        }
+        
+        .back-to-top {
+            background-color: #<?php the_field('couleur-menu');?>; !important
+        }
+        
+        .intro .owl-theme .owl-dots .owl-dot.active span {
+            background-color: #<?php the_field('couleur-menu');?>; !important
+        }
+        
+        .navbar-toggler {
+            margin-top: 0rem;
+        }
+        
+        .owl-stage {
+            margin: 0 auto;
+        }
+        
+/*        .owl-prev {
+            position: absolute;
+            top: 7%;
+            margin-left: 50px;
+            display: block !important;
+            border:0px solid black;
+            font-size: 20px !important;
+        }
+
+        .owl-next {
+            position: absolute;
+            top: 7%;
+            right: 50px;
+            display: block !important;
+            border:0px solid black;
+            font-size: 20px !important;
+        }*/
+        .owl-prev i, .owl-next i {color: #<?php the_field('couleur-menu');?>;}
+        
+        .icono {
+            color:#<?php the_field('couleur-menu');?>;
+            font-size: 20px;
+        }
+        #blur {
+            height:500px;
+            width:100%;
+            text-align:center;
+            background:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvI6d71dKHi7Vp_KyxJThGs1D3p6m6VAWUng&usqp=CAU') center;
+            background-size:cover;
+            -webkit-filter: blur(13px);
+            -moz-filter: blur(13px);
+            -o-filter: blur(13px);
+            -ms-filter: blur(13px);
+            filter: blur(13px);
+            position: absolute;
+            left:0;
+            top: 0;
+        }
+        
+        .owl-item  div{
+  background: #ddd;
+  height: 100px;
+  padding: 10px;
+}
+        
+    </style>
+</head>
+
+<body>
+    <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+    
+    <!-- ======= Header/Navbar ======= -->
+    <nav class="navbar navbar-expand-lg fixed-bottom ">
+        <div id="blur"> 
         </div>
-    </section>
-    
-<style>
-    
-    html, body {
-      height: 100%;
-      margin: 0;
-    }
-
-    .full-height {
-      height: 100%;
-      background: yellow;
-    }
-
-    .demo {
-        width: 100%;
-        height: 100%; !important;
-    }
-                                        ?>
-                                            <li>
-                                                <img src="<?php the_sub_field('fond'); ?>" class="img-fluid" alt="CABLE INDUSTRIEL">>
-                                                <div class="caption">
-                                                    <div class="titre">
-                                                        <!-- <span class="promo">-35%</span> -->
-                                                        <div>
-                                                            <strong><?php the_sub_field('titre'); ?></strong>
-                                                        </div>
-                                                    </div>
-                                                    <a href="<?php the_sub_field('lien'); ?>" class="btn-custom2"><?php the_sub_field('bouton'); ?></a>
-                                                </div>
-                                            </li>
-                                        <?php endwhile; ?>
-                                    <?php endif; ?>
-                                </ul>
+        <div class="container-fluid">
+            
+                 <?php if( have_rows('menu-liste') ): ?>
+                     <?php $i = 0; ?>
+                     <?php while( have_rows('menu-liste') ): the_row(); ?>
+                        <?php if($i != 0): ?>
+                            <div class="col text-center">
+                                <a id="nav-<?php the_sub_field('id-carrousel'); ?>" idDiv="<?php the_sub_field('id-carrousel'); ?>" class="linkChap <?php if($i == 0): echo 'active'; endif;?>" href="#<?php the_sub_field('id-carrousel'); ?>"> <?php the_sub_field('icon');?> </a>
                             </div>
-                        </div>
-                    </div>
-                </section>
+                        <?php endif;?>
+                         
+                     <?php 
+                     $i++;
+                     endwhile; ?>
+                 <?php endif; ?>
+        </div>
+    </nav><!-- End Header/Navbar -->
+    
 
-                <!-- Partenaires -->
-                <section id="partenaire">
-                    <div class="row">
-                        <div class="col-sm-12 text-center">
-                            <?php if( get_field('titre_nos_partenaire', 'option') ): ?>
-                                <p><?php the_field('titre_nos_partenaire', 'option'); ?></p>
+    <!-- ======= Intro Section ======= -->
+    <div class="cv-carousel intro intro-carousel" data-spy="scroll" data-target="#myScrollspy" data-offset="1">
+        <?php if( have_rows('menu-liste') ): ?>
+            <?php $i = 0; ?>
+            <?php while( have_rows('menu-liste') ): the_row(); ?>
+                    <!-- ======= <?php if($i != 0): ?> <div class="container"><?php the_sub_field('sous-categorie-name'); ?></div> <?php endif;?> ======= -->
+                    
+                    <div id="<?php the_sub_field('id-carrousel'); ?>" class="item carouselSky owl-carousel owl-theme">
+                        
+                        <?php
+                            $images = get_sub_field('gallery');
+                            if( $images ): ?>
+                                    <?php foreach($images as $image): ?>
+                                        <img src="<?php echo $image; ?>" class="img-fluid" data-animate="flipInY animated" onContextMenu="return false;">
+                                    <?php endforeach; ?>
                             <?php endif; ?>
-                            <ul class="liste-partenaires">
-                                <?php if( have_rows('liste_partenaires', 'option') ): ?>
-                                    <?php while( have_rows('liste_partenaires', 'option') ): the_row(); ?>
-                                        <li>
-                                            <a href="<?php the_sub_field('lien'); ?>">
-                                                <img src="<?php the_sub_field('logo'); ?>" class="img-fluid" alt="schneider">
-                                            </a>
-                                        </li>
-                                    <?php endwhile; ?>
-                                <?php endif; ?>
-                            </ul>
-                        </div>
                     </div>
-                </section>
-
-                <!-- Newsletter -->
-                <section id="newsletter">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="news">
-                                    <?php if( get_field('fond_newsletter', 'option') ): ?>
-                                        <img src="<?php the_field('fond_newsletter', 'option'); ?>" class="img-fluid" alt="newsletter">
-                                    <?php endif; ?>
-                                    <div class="content">
-                                        <?php if( get_field('titre_newsletter', 'option') ): ?>
-                                            <div class="titre">
-                                                <i class="fas fa-paper-plane"></i> <?php the_field('titre_newsletter', 'option'); ?>
-                                            </div>
-                                        <?php endif; ?>
-                                        <ul class="input">
-                                            <?php if( get_field('description_newsletter', 'option') ): ?>
-                                                <li><?php the_field('description_newsletter', 'option'); ?></li>
-                                            <?php endif; ?>
-                                            <li>
-                                                <!-- Begin Mailchimp Signup Form -->
-                                                <form action="https://skybar-madagscar.us18.list-manage.com/subscribe/post?u=4b73f06c0dc5f5e68295c3f35&amp;id=bd990ba08d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate newsletter__form" target="_blank" novalidate>
-                                                    <input type="email" value="" name="EMAIL" class="required email newsletter__form-input" id="mce-EMAIL" placeholder="Saisissez votre adresse email*">
-                                                    <div id="mce-responses" class="clear">
-                                                        <div class="response" id="mce-error-response" style="display:none"></div>
-                                                        <div class="response" id="mce-success-response" style="display:none"></div>
-                                                    </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                                                    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_4b73f06c0dc5f5e68295c3f35_bd990ba08d" tabindex="-1" value=""></div>
-                                                    <button class="newsletter__form-submit" name="subscribe" id="mc-embedded-subscribe">S'inscrire <i class="fas fa-envelope"></i></button>
-                                                </form>
-                                                <!--End mc_embed_signup-->
-                </li>
-            </ul>
-                                        <?php if( get_field('footer_texte_newsletter', 'option') ): ?>
-                                            <?php the_field('footer_texte_newsletter', 'option'); ?>
-                                        <?php endif; ?>
-        </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                    
+            <?php 
+                    $i++;
+                endwhile; ?>
+        <?php endif; ?>
+        
+    </div><!-- End Intro Sectionhttps://eden.mg/skybar/wp-content/uploads/2021/03/NOVOTEL_Teppanyaki-2021_768x1366pxl-menu-1-2-scaled.jpg  -->
     
-            </div>
-        </div>
-    </div>
+    <?php endwhile; ?>
+  <?php endif; ?>
 
-<?php get_footer(); ?>
+
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="<?php bloginfo("template_url");  ?>/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+  <script src="<?php bloginfo("template_url");  ?>/assets/vendor/php-email-form/validate.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="<?php bloginfo("template_url");  ?>/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+  <script src="<?php bloginfo("template_url");  ?>/assets/vendor/scrollreveal/scrollreveal.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.appear/0.4.1/jquery.appear.min.js" integrity="sha512-vYYoQJKYzaJQaOaYxaJhhmxikOJ2SEgHwmCNa0EMP0aRr7opdt4HHrorAwnCyPm8bdW/JBApIomo85YaBX81zA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
+    <!-- NOTE: prior to v2.2.1 tiny-slider.js need to be in <body> -->
+
+  
+  <script src="<?php bloginfo("template_url");  ?>/assets/mobile-vertical-carousel/src/carousel-vertical.js"></script>
+  <!-- Template Main JS File -->
+  <script src="<?php bloginfo("template_url");  ?>/assets/js/main.js"></script>
+  <script>
+    $(document).ready(function() {
+        
+        var animateTemp = 0;
+        var customizedFunction = function (info, eventName) {
+            // direct access to info object
+            animateTemp = 0;
+            for (var i = 0; i < chapLenght - 1; i++) {
+                if (chapitre[i] != $('.tns-slide-active').attr('id')) {
+                    chapArray[chapitre[i]].trigger('to.owl.carousel', [0, 1, false]);
+                }
+            }
+            
+        }
+          
+        var slider = tns({
+            container: '.cv-carousel',
+            items: 1,
+            loop: false,
+            nav: false,
+            slideBy: "page",
+            axis: "vertical",
+            controls: false,
+        });
+
+        // bind function to event
+        slider.events.on('transitionEnd', customizedFunction);
+        var chapitreString = "<?php if( have_rows('menu-liste') ): 
+            $j = 0;
+            while(have_rows('menu-liste')): the_row();
+                    printf(the_sub_field('id-carrousel'));
+                    printf(",");
+
+                $j++;
+            endwhile; 
+         endif; ?>";
+                 
+        var chapitre = chapitreString.split(",");
+        
+        var owlCaroussOption = {
+            loop: false,
+            items: 1,
+            dots: false,
+            navText: ["<i class='fa fa-arrow-circle-left'></i>","<i class='fa fa-arrow-circle-right'></i>"],
+            onDrag: function(e) {
+                animateTemp = e.item.index;
+            },
+            onDragged: animateDraggSlide,
+            //onTranslated: animateSlide,
+            onTranslate: removeAnimation,
+            responsive: {
+                0: {
+                    items: 1,
+                    margin: 30
+                },
+                600: {
+                    items: 1,
+                    margin: 30,
+                        }
+                    }
+        };
+        
+        
+        var chapLenght = chapitre.length;
+        var chapArray = [];
+        for (var i = 0; i < chapLenght - 1; i++) {
+            
+            chapArray[chapitre[i]] = $('#' + chapitre[i]);
+            chapArray[chapitre[i]].owlCarousel(owlCaroussOption);
+        }
+        var anime = false;
+        function animateDraggSlide(e) {
+            if (animateTemp == 0) {
+                console.log("animateDraggSlide");
+                anime = true;
+                var item = $(".owl-item.active");
+                item.addClass(item.children().data('animate'));
+            }
+        }
+        
+        function animateSlide(e) {
+            if (anime == true) {
+                anime = false;
+                return false;
+            }
+            console.log("animateSlide");
+            var item = $(".owl-item.active");
+            item.addClass(item.children().data('animate'));
+        }
+        
+        // Other Slides
+        function removeAnimation() {
+            var item = $(".owl-item");
+            item.removeClass("flipInY animated");
+        }
+            
+//        $(".owl-nav").each(function() {
+//            console.log($(this).children()[0]);
+//            //$(this).children().removeClass("owl-prev owl-next") ;
+//            //$(this).children().addClass("btn");
+//        });
+
+        
+        var currentCarrousselId = "";
+        //$(".linkChap").on("click", function() {
+//            
+//            $(this).children().addClass('animated flip');
+//            var child = $(this).children();
+//            setTimeout(function(){ child.removeClass('animated flip'); }, 3000);
+//            
+//            var navIdlink = $(this).attr("id");
+//            var idDiv = $(this).attr("idDiv");
+//            currentCarrousselId = idDiv;
+//            
+//            //remove active
+//            var actif = $(".linkChap.active");
+//            var idDivActif = actif.attr("idDiv");
+//            actif.removeClass("active");
+//            if (idDivActif == undefined) {
+//                idDivActif = "couverture";
+//            }
+//            if (idDiv != idDivActif) {
+//                $("#" + idDiv).removeClass("d-none");
+//                $("#" + idDivActif).addClass("d-none");
+//                
+//                chapArray[idDiv].trigger('play.owl.autoplay', [5000]);
+//                chapArray[idDivActif].trigger('stop.owl.autoplay');
+//                $("#nav-" + idDivActif).children().css("color", "black");
+//                
+//                setTimeout(function(){ 
+//                     console.log($("#" + idDivActif + " .owl-nav").children());
+//                    $("#" + idDivActif + " .owl-nav").children().addClass('animated heartBeat'); 
+//                }, 5000);
+//                
+//            }
+//            var textSpan = $(this).text();
+//            
+//            $("#titreMenu").text(textSpan);
+//            $("#" + navIdlink).addClass("active");
+//            $("#" + navIdlink).children().css("color", "red");
+        //});
+        $(".owl-prev").on("click", function() {
+            var child = $(this).children();
+            child.css("color", "red");
+            child.addClass('animated fadeOutLeft');
+            setTimeout(function(){ 
+                child.css("color", "black");
+                child.removeClass('animated fadeOutLeft'); }, 1000);
+        });
+        
+        $(".owl-next").on("click", function() {
+            var child = $(this).children();
+            child.css("color", "red");
+            child.addClass('animated fadeOutRight');
+            setTimeout(function(){ 
+                child.css("color", "black");
+                child.removeClass('animated fadeOutRight'); }, 1000);
+        });
+        
+      });
+  </script>
+
+</body>
+
+</html>

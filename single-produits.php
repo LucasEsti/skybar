@@ -55,12 +55,18 @@
         .navbar-toggler {
             margin-top: 0rem;
         }
+/*        #tns1 {
+            margin-top: 50px !important;
+        }*/
+        .tns-item {
+            margin-top: 15px !important;
+        }
         
         .owl-stage {
             margin: 0 auto;
         }
         
-        .owl-prev {
+/*        .owl-prev {
             position: absolute;
             top: 7%;
             margin-left: 50px;
@@ -76,14 +82,14 @@
             display: block !important;
             border:0px solid black;
             font-size: 20px !important;
-        }
+        }*/
         .owl-prev i, .owl-next i {color: #<?php the_field('couleur-menu');?>;}
         
         .icono {
             color:#<?php the_field('couleur-menu');?>;
             font-size: 20px;
         }
-        #blur {
+/*        #blur {
             height:500px;
             width:100%;
             text-align:center;
@@ -97,13 +103,13 @@
             position: absolute;
             left:0;
             top: 0;
-        }
+        }*/
         
         .owl-item  div{
-  background: #ddd;
-  height: 100px;
-  padding: 10px;
-}
+            background: #ddd;
+            height: 100px;
+            padding: 10px;
+          }
         
     </style>
 </head>
@@ -112,7 +118,7 @@
     <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
     
     <!-- ======= Header/Navbar ======= -->
-    <nav class="navbar d-none navbar-expand-lg fixed-bottom ">
+    <nav class="navbar d-none navbar-expand-lg">
         <div id="blur"> 
         </div>
         <div class="container-fluid">
