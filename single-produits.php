@@ -18,7 +18,6 @@
     <link href="<?php bloginfo("template_url");  ?>/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css">
     <!-- Vendor CSS Files -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="<?php bloginfo("template_url");  ?>/assets/vendor/ionicons/css/ionicons.min.css" rel="stylesheet">
@@ -113,7 +112,7 @@
     <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
     
     <!-- ======= Header/Navbar ======= -->
-    <nav class="navbar navbar-expand-lg fixed-bottom ">
+    <nav class="navbar d-none navbar-expand-lg fixed-bottom ">
         <div id="blur"> 
         </div>
         <div class="container-fluid">
@@ -175,8 +174,8 @@
   <script src="<?php bloginfo("template_url");  ?>/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
   <script src="<?php bloginfo("template_url");  ?>/assets/vendor/scrollreveal/scrollreveal.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.appear/0.4.1/jquery.appear.min.js" integrity="sha512-vYYoQJKYzaJQaOaYxaJhhmxikOJ2SEgHwmCNa0EMP0aRr7opdt4HHrorAwnCyPm8bdW/JBApIomo85YaBX81zA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
-<!-- NOTE: prior to v2.2.1 tiny-slider.js need to be in <body> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
+    <!-- NOTE: prior to v2.2.1 tiny-slider.js need to be in <body> -->
 
   
   <script src="<?php bloginfo("template_url");  ?>/assets/mobile-vertical-carousel/src/carousel-vertical.js"></script>
@@ -185,8 +184,10 @@
   <script>
     $(document).ready(function() {
         
+        var animateTemp = 0;
         var customizedFunction = function (info, eventName) {
             // direct access to info object
+            animateTemp = 0;
             for (var i = 0; i < chapLenght - 1; i++) {
                 if (chapitre[i] != $('.tns-slide-active').attr('id')) {
                     chapArray[chapitre[i]].trigger('to.owl.carousel', [0, 1, false]);
@@ -219,12 +220,14 @@
                  
         var chapitre = chapitreString.split(",");
         
-        
         var owlCaroussOption = {
             loop: false,
             items: 1,
             dots: false,
             navText: ["<i class='fa fa-arrow-circle-left'></i>","<i class='fa fa-arrow-circle-right'></i>"],
+            onDrag: function(e) {
+                animateTemp = e.item.index;
+            },
             onDragged: animateDraggSlide,
             //onTranslated: animateSlide,
             onTranslate: removeAnimation,
@@ -250,10 +253,12 @@
         }
         var anime = false;
         function animateDraggSlide(e) {
-            console.log("animateDraggSlide");
-            anime = true;
-            var item = $(".owl-item.active");
-            item.addClass(item.children().data('animate'));
+            if (animateTemp == 0) {
+                console.log("animateDraggSlide");
+                anime = true;
+                var item = $(".owl-item.active");
+                item.addClass(item.children().data('animate'));
+            }
         }
         
         function animateSlide(e) {
@@ -280,7 +285,7 @@
 
         
         var currentCarrousselId = "";
-        $(".linkChap").on("click", function() {
+        //$(".linkChap").on("click", function() {
 //            
 //            $(this).children().addClass('animated flip');
 //            var child = $(this).children();
@@ -316,7 +321,7 @@
 //            $("#titreMenu").text(textSpan);
 //            $("#" + navIdlink).addClass("active");
 //            $("#" + navIdlink).children().css("color", "red");
-        });
+        //});
         $(".owl-prev").on("click", function() {
             var child = $(this).children();
             child.css("color", "red");
