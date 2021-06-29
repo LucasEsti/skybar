@@ -58,9 +58,9 @@
 /*        #tns1 {
             margin-top: 50px !important;
         }*/
-        .tns-item {
-            margin-top: 15px !important;
-        }
+/*        #tns1-mw {
+            height: 677px;
+        }*/
         
         .owl-stage {
             margin: 0 auto;
